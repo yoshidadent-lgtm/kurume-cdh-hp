@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""WordPress エクスポートXMLから、公開ページ・公開投稿だけを data/ に取り込む。
+使い方: python3 -I tools/import_wp.py <XMLのパス>
+- 非公開（private）、パスワード付き、下書きは取り込まない。XML自体はリポジトリに置かない。
+- 旧テーマ専用の記号（[call_php] など）は「（準備中）」に置き換える。画像・iframe・script は取り込まない。"""
+import sys, re, json, pathlib, html, xml.etree.ElementTree as ET
+from html.parser import HTMLParser
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+ns = {'wp': 'http://wordpress.org/export/1.2/', 'content': 'http://purl.org/rss/1.0/modules/content/'}
+# 旧スラッグ → 新スラッグ（ホームは別途、手で作る）
+SLUG = {'school': 'about', 'dental-hygienist': 'dental-hygienist', 'flow': 'flow', 'employment': 'career', 'admission': 'admission',
+        'curriculum': 'curriculum', 'access': 'access', 'contact': 'contact', 'opencampus-contact': 'opencampus',
+        'document-request': 'document-request', 'school-tour': 'school-tour', 'document': 'document', 'reunion_mail': 'alumni',
+        'equipment': 'facilities', 'interview': 'interview', 'faq': 'faq', 'page-2465': 'dormitory', 'page-2482': 'results'}
+KEEP = {'p','h2','h3','h4','h5','ul','ol','li','table','thead','tbody','tr','th','td','a','strong','b','em','br','dl','dt','dd','blockquote'}
+DROP = {'script','style','iframe','img','form','input','button','select','textarea','svg','noscript','video','audio'}
+PENDING = '<p class="pending">（準備中）この部分は、新サイトで作り直します。</p>'
+
+class Clean(HTMLParser):
+    def __init__(self): super().__init__(convert_charrefs=True); self.out = []; self.skip = 0; self.stack = []
+    def handle_starttag(self, t, a):
+        if t in DROP: self.skip += 1 if t not in ('img','input') else 0; return
+        if self.skip: return
+        if t == 'h1': t = 'h2'
+        if t in KEEP:
+            at = ''
+            if t == 'a':
+                h = dict(a).get('href') or ''
+                if h.startswith(('http://', 'https://', 'mailto:', 'tel:')) or h.startswith('[hurl]'):
+                    at = ' href="%s"' % html.escape(fixlink(h)) + (' target="_blank" rel="noopener noreferrer"' if h.startswith('http') and 'kurume-dental.or.jp' not in h else '')
+            self.out.append('<%s%s>' % (t, at)); self.stack.append(t) if t not in ('br',) else None
+    def handle_endtag(self, t):
+        if t in DROP: self.skip = max(0, self.skip - 1) if t not in ('img','input') else self.skip; return
+        if self.skip: return
+        if t == 'h1': t = 'h2'
+        if t in KEEP and t != 'br': self.out.append('</%s>' % t)
+    def handle_startendtag(self, t, a):
+        if t == 'br' and not self.skip: self.out.append('<br>')
+    def handle_data(self, d):
+        if not self.skip: self.out.append(re.sub(r'\n\s*\n', '<br><br>', html.escape(d)))
+
+def fixlink(h):
+    h = h.replace('[hurl]', '')
+    m = re.match(r'https?://(?:www\.)?kurume-dental\.or\.jp/kdhs/?(.*)$', h)
+    if m or not h.startswith(('http', 'mailto', 'tel')):
+        path = (m.group(1) if m else h).strip('/').split('/')[-1]
+        return '{{R}}' + SLUG.get(path, path) + '/' if path in SLUG else ('{{R}}' if not path else h)
+    return h
+
+def clean(src):
+    src = re.sub(r"\[call_php[^\]]*\]", '@@PENDING@@', src)
+    src = re.sub(r"\[(?:ngg|contact-form-7|gallery|[a-z_]+)[^\]]*\]", '@@PENDING@@', src)
+    c = Clean(); c.feed(src); out = ''.join(c.out).replace('@@PENDING@@', PENDING)
+    out = re.sub(r'<(\w+)>\s*</\1>', '', out)                      # 空タグ
+    out = re.sub(r'<p>\s*(<p class="pending">.*?</p>)\s*</p>', r'\1', out, flags=re.S)
+    if '<li>' not in out: out = re.sub(r'</?(ul|ol)>', '', out)
+    out = re.sub(r'(?:<br>\s*){3,}', '<br><br>', out)
+    out = re.sub(r'<p>\s*(<br>\s*)*</p>', '', out)
+    out = re.sub(r'<(ul|ol)>((?:(?!<li>).)*?)</\1>', r'<p>\2</p>', out, flags=re.S)  # li のない ul
+    # 文字のみ（ブロックタグなし）の塊を段落に
+    if not re.search(r'<(p|h\d|ul|ol|table|dl)\b', out): out = '<p>%s</p>' % out
+    return out.strip()
+
+def main(path):
+    ch = ET.parse(path).getroot().find('channel'); g = lambda i, k: i.findtext(k, namespaces=ns)
+    pages, news = [], []
+    for i in ch.findall('item'):
+        t, st, pw = g(i, 'wp:post_type'), g(i, 'wp:status'), g(i, 'wp:post_password')
+        if st != 'publish' or pw: continue
+        title, body = (i.findtext('title') or '').strip(), g(i, 'content:encoded') or ''
+        if t == 'page' and g(i, 'wp:post_name') in SLUG:
+            pages.append({'slug': SLUG[g(i, 'wp:post_name')], 'title': title, 'lead': '', 'body': '<section>%s</section>' % clean(body), 'old_slug': g(i, 'wp:post_name')})
+        elif t == 'post':
+            news.append({'date': g(i, 'wp:post_date')[:10], 'title': title, 'body': clean(body), 'id': g(i, 'wp:post_id')})
+    order = list(SLUG.values()); pages.sort(key=lambda p: order.index(p['slug'])); news.sort(key=lambda n: n['date'], reverse=True)
+    (ROOT/'data/imported_pages.json').write_text(json.dumps(pages, ensure_ascii=False, indent=1), encoding='utf-8')
+    (ROOT/'data/news.json').write_text(json.dumps(news, ensure_ascii=False, indent=1), encoding='utf-8')
+    print('ページ %d 件、お知らせ %d 件' % (len(pages), len(news)))
+main(sys.argv[1])

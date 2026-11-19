@@ -5,17 +5,25 @@ import json, html, datetime, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 site = json.loads((ROOT/'data/site.json').read_text(encoding='utf-8'))
 pages = json.loads((ROOT/'data/pages.json').read_text(encoding='utf-8'))
+_imp = ROOT/'data/imported_pages.json'
+if _imp.exists(): pages += json.loads(_imp.read_text(encoding='utf-8'))
+news = json.loads((ROOT/'data/news.json').read_text(encoding='utf-8')) if (ROOT/'data/news.json').exists() else []
 tpl = lambda n: (ROOT/'templates'/n).read_text(encoding='utf-8')
 YEAR = str(datetime.date.today().year)
 e = html.escape
+
+def news_html(R, limit=5):
+    if not news: return '<p>お知らせはありません。</p>'
+    return '<ul class="news">' + ''.join('<li><span>%s</span> <a href="%snews/%s/">%s</a></li>' % (n['date'].replace('-', '.'), R, n['id'], e(n['title'])) for n in news[:limit]) + '</ul>'
 
 def render(slug, title, lead, body, depth, canon_path):
     R = '../' * depth
     nav = ''.join('<a href="%s%s/"%s>%s</a>' % (R, s, ' aria-current="page"' if s == slug else '', e(t)) for s, t in site['nav'])
     page = tpl('header.html') + body + tpl('footer.html')
+    page = page.replace('{{NEWS}}', news_html(R))
     full = site['name_ja'] if not slug else '%s | %s' % (title, site['name_ja'])
     rep = {'{{TITLE}}': e(full), '{{DESC}}': e(site['description']), '{{CANON}}': site['origin'] + canon_path,
-           '{{NAV}}': nav, '{{NAME_JA}}': e(site['name_ja']), '{{NAME_EN}}': e(site['name_en']),
+           '{{NAV}}': nav, '{{FNAV}}': ' / '.join('<a href="%s%s/">%s</a>' % (R, s, e(n)) for s, n in site.get('footer_nav', [])), '{{NAME_JA}}': e(site['name_ja']), '{{NAME_EN}}': e(site['name_en']),
            '{{H1}}': e(title if slug else site['name_en']), '{{LEAD}}': e(lead), '{{ADDRESS}}': e(site['address']),
            '{{TEL}}': e(site['tel']), '{{YEAR}}': YEAR, '{{R}}': R}
     for k, v in rep.items():
@@ -30,6 +38,13 @@ for p in pages:
     s = p['slug']; depth = 1 if s else 0
     write((s + '/index.html') if s else 'index.html', render(s, p['title'], p['lead'], p['body'], depth, '/' + (s + '/' if s else '')))
     urls.append(site['origin'] + '/' + (s + '/' if s else ''))
+
+# お知らせ（一覧と各記事）
+write('news/index.html', render('news', 'お知らせ', '', '<section>' + news_html('../', 100) + '</section>', 1, '/news/'))
+urls.append(site['origin'] + '/news/')
+for n in news:
+    write('news/%s/index.html' % n['id'], render('news', n['title'], n['date'].replace('-', '.'), '<section>%s</section>' % n['body'], 2, '/news/%s/' % n['id']))
+    urls.append(site['origin'] + '/news/%s/' % n['id'])
 
 # 404（どの階層からでも表示できるよう、サイトの根元を絶対パスで指す）
 bp = site['base_path']

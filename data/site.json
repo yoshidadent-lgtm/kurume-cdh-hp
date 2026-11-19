@@ -3,16 +3,87 @@
   "name_en": "Kurume College of Dental Hygiene",
   "origin": "https://yoshidadent-lgtm.github.io/kurume-cdh-hp",
   "base_path": "/kurume-cdh-hp",
-  "tel": "（仮）0942-00-0000",
-  "address": "（仮）福岡県久留米市〇〇町0-0",
+  "tel": "0942-34-6116",
+  "address": "〒830-0013 福岡県久留米市櫛原町98",
   "description": "久留米歯科衛生専門学校（Kurume College of Dental Hygiene）の公式サイトです。",
   "nav": [
-    ["about", "学校紹介"],
-    ["curriculum", "カリキュラム"],
-    ["admission", "入学案内"],
-    ["opencampus", "オープンキャンパス"],
-    ["career", "進路・就職"],
-    ["access", "アクセス"],
-    ["contact", "お問い合わせ"]
+    [
+      "about",
+      "学校案内"
+    ],
+    [
+      "dental-hygienist",
+      "歯科衛生士とは"
+    ],
+    [
+      "curriculum",
+      "カリキュラム"
+    ],
+    [
+      "admission",
+      "入試について"
+    ],
+    [
+      "career",
+      "就職について"
+    ],
+    [
+      "access",
+      "アクセス"
+    ],
+    [
+      "contact",
+      "お問い合わせ"
+    ]
+  ],
+  "footer_nav": [
+    [
+      "flow",
+      "卒業までの流れ"
+    ],
+    [
+      "facilities",
+      "校内施設・設備"
+    ],
+    [
+      "interview",
+      "在校生メッセージ"
+    ],
+    [
+      "faq",
+      "Q&A"
+    ],
+    [
+      "opencampus",
+      "オープンキャンパス申込み"
+    ],
+    [
+      "school-tour",
+      "学校見学会"
+    ],
+    [
+      "document-request",
+      "資料請求"
+    ],
+    [
+      "results",
+      "合格発表"
+    ],
+    [
+      "dormitory",
+      "女子指定寮"
+    ],
+    [
+      "document",
+      "求人・見学実習"
+    ],
+    [
+      "alumni",
+      "卒業生の方へ"
+    ],
+    [
+      "news",
+      "お知らせ"
+    ]
   ]
 }
