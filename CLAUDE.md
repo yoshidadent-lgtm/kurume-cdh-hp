@@ -1,7 +1,7 @@
 # プロジェクトメモ
 
 ## 目標
-- 久留米歯科衛生専門学校（英語名：Kurume College of Dental Hygiene ※綴りはユーザー確認待ち）の公式サイトを、GitHub Pages で運用する静的サイトとして新規に作る。
+- 久留米歯科衛生専門学校（英語名：Kurume College of Dental Hygiene）の公式サイトを、GitHub Pages で運用する静的サイトとして新規に作る。
 - 本会（久留米歯科医師会）のサイト `yoshidadent-lgtm/kurumedental-hp` と同じ方式で作る（`data/` と `templates/` から `tools/build.py` で生成）。
 - 新しい固有アドレス（独自ドメイン）を新規に取得し、GitHub 上で運用する。本会サイトとは独立（DNSも別管理）。
 - 旧サイト `/kdhs/`（kurume-dental.or.jp 配下の別WordPress）は、新サイト公開まで今のまま残し、公開後に新アドレスへ 301 転送する（設定は学校の担当者）。
