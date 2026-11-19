@@ -19,3 +19,11 @@
 ## 運用
 - リポジトリは個人アカウント `yoshidadent-lgtm/kurume-cdh-hp`（Public）。完成後、Organization `kurume-dental-association` へ移す予定（移動後は Pages・Secrets・権限・セッション接続を再確認）。
 - 現在の `index.html` は「HP改善・週次進捗管理」ツール（学校サイトとは無関係）。扱いは、ユーザーに確認中。
+
+## 作り方（静的サイトの生成）
+- `python3 tools/build.py` で、`data/site.json`、`data/pages.json`、`templates/` から全ページ・`sitemap.xml`・`robots.txt`・`404.html` を生成する（標準ライブラリのみ）。生成された HTML は直接編集せず、`data/` と `templates/` を直す。
+- CSS・JSは `assets/` に置く。外部CDNは使わない。
+- ページ本文は現在「（仮）」の仮文章。実際の内容は、旧 `/kdhs/` の内容（XML・画像の受領後）に差し替える。住所・電話も仮。
+- 公開前に、`data/site.json` の `origin` と `base_path` を新しい独自ドメインに直す（独自ドメインなら `base_path` は空にし、`CNAME` を置く）。
+- favicon は、本会サイトのものを仮に流用している。学校用のロゴ・faviconに差し替える。
+- 旧 `index.html`（HP改善・週次進捗管理ツール）は、A案：別の Private リポジトリへ移す（`main` へ進む前に）。

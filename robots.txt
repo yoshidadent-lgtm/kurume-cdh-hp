@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yoshidadent-lgtm.github.io/kurume-cdh-hp/sitemap.xml
