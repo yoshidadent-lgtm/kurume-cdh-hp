@@ -1,11 +1,56 @@
 [
- {"slug":"","title":"ホーム","lead":"地域の口の健康を支える、歯科衛生士を育てます。","body":"<section class=\"hero\"><h2>歯科衛生士をめざす、あなたへ</h2><p>（仮）学校の理念・特色をここに入れます。実際の文章は、既存サイトの内容に差し替えます。</p><p><a class=\"btn\" href=\"{{R}}opencampus/\">オープンキャンパスに参加する</a> <a class=\"btn sub\" href=\"{{R}}admission/\">入学案内を見る</a></p></section><section><h2>学校の特色</h2><div class=\"cards\"><div class=\"card\"><h3>（仮）特色 1</h3><p>実習の内容などを入れます。</p></div><div class=\"card\"><h3>（仮）特色 2</h3><p>国家試験対策などを入れます。</p></div><div class=\"card\"><h3>（仮）特色 3</h3><p>就職支援などを入れます。</p></div></div></section><section><h2>お知らせ</h2><ul class=\"news\"><li><span>2026年11月19日</span> （仮）お知らせの例です。</li></ul></section>"},
- {"slug":"about","title":"学校紹介","lead":"本校の理念と沿革です。","body":"<section><h2>教育理念</h2><p>（仮）</p></section><section><h2>沿革</h2><p>（仮）</p></section><section><h2>学校概要</h2><table class=\"info\"><tr><th>学校名</th><td>久留米歯科衛生専門学校</td></tr><tr><th>所在地</th><td>{{ADDRESS}}</td></tr><tr><th>電話</th><td>{{TEL}}</td></tr></table></section>"},
- {"slug":"curriculum","title":"カリキュラム","lead":"学びの内容と、1年間の流れです。","body":"<section><h2>学ぶ内容</h2><p>（仮）</p></section><section><h2>年間スケジュール</h2><p>（仮）</p></section>"},
- {"slug":"admission","title":"入学案内","lead":"募集要項・学費・入試日程です。","body":"<section><h2>募集要項</h2><p>（仮）</p></section><section><h2>学費</h2><p>（仮）</p></section><section><h2>入試日程</h2><p>（仮）</p></section>"},
- {"slug":"opencampus","title":"オープンキャンパス","lead":"学校の雰囲気を、体験できます。","body":"<section><h2>開催日程</h2><p>（仮）</p></section><section><h2>申し込み</h2><p>（仮）</p></section>"},
- {"slug":"career","title":"進路・就職","lead":"卒業後の進路です。","body":"<section><h2>主な就職先</h2><p>（仮）</p></section><section><h2>国家試験</h2><p>（仮）</p></section>"},
- {"slug":"access","title":"アクセス","lead":"学校までの行き方です。","body":"<section><h2>所在地</h2><p>{{ADDRESS}}</p></section><section><h2>交通</h2><p>（仮）</p></section>"},
- {"slug":"contact","title":"お問い合わせ","lead":"入学・見学についてのご相談は、こちらへ。","body":"<section><h2>電話</h2><p>{{TEL}}</p></section><section><h2>メール</h2><p>（仮）メールアドレスは、迷惑メール対策のうえで掲載します。</p></section>"},
- {"slug":"privacy","title":"プライバシーポリシー","lead":"個人情報の取り扱いについて。","body":"<section><p>（仮）</p></section>"}
+ {
+  "slug": "",
+  "title": "ホーム",
+  "lead": "地域の口の健康を支える、歯科衛生士を育てます。",
+  "body": "<p class=\"line\"><a class=\"btn line-btn\" href=\"https://lin.ee/k6hfnch\" target=\"_blank\" rel=\"noopener noreferrer\">LINE公式アカウントで相談する</a></p><section class=\"hero\"><h2>歯科衛生士をめざす、あなたへ</h2><p>（仮）学校の理念・特色をここに入れます。実際の文章は、既存サイトの内容に差し替えます。</p><p><a class=\"btn\" href=\"{{R}}opencampus/\">オープンキャンパスに参加する</a> <a class=\"btn sub\" href=\"{{R}}admission/\">入学案内を見る</a></p></section><section><h2>学校の特色</h2><div class=\"cards\"><div class=\"card\"><h3>（仮）特色 1</h3><p>実習の内容などを入れます。</p></div><div class=\"card\"><h3>（仮）特色 2</h3><p>国家試験対策などを入れます。</p></div><div class=\"card\"><h3>（仮）特色 3</h3><p>就職支援などを入れます。</p></div></div></section><section><h2>お知らせ</h2><ul class=\"news\"><li><span>2026年11月19日</span> （仮）お知らせの例です。</li></ul></section>"
+ },
+ {
+  "slug": "about",
+  "title": "学校紹介",
+  "lead": "本校の理念と沿革です。",
+  "body": "<section><h2>教育理念</h2><p>（仮）</p></section><section><h2>沿革</h2><p>（仮）</p></section><section><h2>学校概要</h2><table class=\"info\"><tr><th>学校名</th><td>久留米歯科衛生専門学校</td></tr><tr><th>所在地</th><td>{{ADDRESS}}</td></tr><tr><th>電話</th><td>{{TEL}}</td></tr></table></section>"
+ },
+ {
+  "slug": "curriculum",
+  "title": "カリキュラム",
+  "lead": "学びの内容と、1年間の流れです。",
+  "body": "<section><h2>学ぶ内容</h2><p>（仮）</p></section><section><h2>年間スケジュール</h2><p>（仮）</p></section>"
+ },
+ {
+  "slug": "admission",
+  "title": "入学案内",
+  "lead": "募集要項・学費・入試日程です。",
+  "body": "<section><h2>募集要項</h2><p>（仮）</p></section><section><h2>学費</h2><p>（仮）</p></section><section><h2>入試日程</h2><p>（仮）</p></section>"
+ },
+ {
+  "slug": "opencampus",
+  "title": "オープンキャンパス",
+  "lead": "学校の雰囲気を、体験できます。",
+  "body": "<section><h2>開催日程</h2><p>（仮）</p></section><section><h2>申し込み</h2><p>（仮）</p></section>"
+ },
+ {
+  "slug": "career",
+  "title": "進路・就職",
+  "lead": "卒業後の進路です。",
+  "body": "<section><h2>主な就職先</h2><p>（仮）</p></section><section><h2>国家試験</h2><p>（仮）</p></section>"
+ },
+ {
+  "slug": "access",
+  "title": "アクセス",
+  "lead": "学校までの行き方です。",
+  "body": "<section><h2>所在地</h2><p>{{ADDRESS}}</p></section><section><h2>交通</h2><p>（仮）</p></section>"
+ },
+ {
+  "slug": "contact",
+  "title": "お問い合わせ",
+  "lead": "入学・見学についてのご相談は、こちらへ。",
+  "body": "<section><h2>電話</h2><p>{{TEL}}</p></section><section><h2>メール</h2><p>（仮）メールアドレスは、迷惑メール対策のうえで掲載します。</p></section>"
+ },
+ {
+  "slug": "privacy",
+  "title": "プライバシーポリシー",
+  "lead": "個人情報の取り扱いについて。",
+  "body": "<section><p>（仮）</p></section>"
+ }
 ]

@@ -25,3 +25,4 @@ h2{border-left:6px solid var(--main);padding-left:10px;font-size:1.3rem}
 table.info{border-collapse:collapse;width:100%}table.info th,table.info td{border:1px solid var(--line);padding:10px;text-align:left}table.info th{background:var(--bg);width:9em}
 .site-footer{background:var(--dark);color:#fff;padding:24px 0;text-align:center}.site-footer a{color:#fff}
 @media(max-width:760px){.menu-btn{display:block}#gnav{display:none;width:100%}#gnav.open{display:block}#gnav a{display:block;border-bottom:1px solid var(--line)}}
+.line{text-align:center;margin:0 0 20px}.btn.line-btn{background:#06c755;font-weight:bold}
