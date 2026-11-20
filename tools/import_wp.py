@@ -146,6 +146,8 @@ for _k, _v in ADMISSION_IMG.items():
     PROVIDED[_k] = ''.join(doc_img(n, a) for n, a in _v)
 # 文章で受け取った・読み取った部分
 # ユーザーから受領（旧サイトの管理画面の内容。2026-11-20）。文言は、受領したとおり。
+# 学校案内の「カリキュラム」（school_file）。旧サイトの表示が未確認のため、当面は「カリキュラム」のページへの案内にしている。
+PROVIDED['school_file'] = '<p><a class="btn" href="{{R}}curriculum/">カリキュラムの詳細を見る</a></p>'
 PROVIDED['admission_qualifications'] = '''<ul>
 <li>高等学校卒業者及び同等の資格を有する者、または2027年（令和9年）3月に高等学校卒業見込みの方</li>
 <li>文部科学大臣が指定した方</li></ul>'''
