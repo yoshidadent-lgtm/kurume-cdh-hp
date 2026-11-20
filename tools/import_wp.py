@@ -29,6 +29,9 @@ IMGMAP = {  # 旧パス: (新パス, alt, 幅, 高さ, class)
     'images/realvoice/rl_vo_img12.jpg': ('assets/images/career/voice2-portrait.jpg', '歯科衛生士の卒業生', 407, 423, 'photo small'),
     'images/access/access.png': ('assets/images/access/access.png', '最寄駅から学校までのアクセス図（詳細は下の文章をご覧ください）', 602, 282, 'photo'),
     'images/canpus_image1.png': ('assets/images/opencampus/opencampus.webp', 'オープンキャンパスの様子', 1002, 387, 'photo'),
+    # 学校案内と歯科衛生士についての、両方で使う画像
+    'images/dental-hyg_img01.png': ('assets/images/shared/dental-hygienist-collage.webp', '卒業生の戴帽式、学校行事、実習の様子を集めた写真', 1000, 500, 'photo'),
+    'images/dental-hygn/whats_img01.jpg': ('assets/images/shared/students-suits.jpg', 'スーツ姿の本校の学生', 480, 400, 'photo med'),
     # 学校案内。「学校の特長」の写真は、旧サイトの本文の並び順（01〜04）と、受領した順が一致するものと推定。要確認。
     'images/school/dr_photo.jpg': ('assets/images/about/principal.jpg', '学校長 首藤 俊介', 400, 480, 'photo principal'),
     'images/school/school_point_img01.jpg': ('assets/images/about/point-01.jpg', '歯科用の器具（ミラーとピンセット）', 480, 380, 'photo med'),

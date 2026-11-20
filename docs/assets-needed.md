@@ -185,3 +185,9 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - `realvoice/rl_vo_img11.jpg`、`rl_vo_sub11.png`。就職について（東京勤務の卒業生）。
 
 **載せない：7点**（在校生・講師の写真）、**不要：2点**（`rl_vo_img04.jpg`、`rl_vo_sub04.png`。旧サイトで非表示）。
+
+## 23. 受領済み（2026-11-20、共通の2点）
+- `dental-hyg_img01.png`（「Dental hygienist」の合成画像。受領は webp）→ `assets/images/shared/dental-hygienist-collage.webp`。
+- `dental-hygn/whats_img01.jpg`（スーツ姿の学生5人）→ `assets/images/shared/students-suits.jpg`。
+- 2点とも、学校案内と歯科衛生士についてのページで使われる（旧サイトと同じ位置）。
+- 「テーマの画像」の必要分の残りは、4点：`school/school_point_img05_new.jpg`、`school_point_img06.jpg`、`realvoice/rl_vo_img11.jpg`、`rl_vo_sub11.png`。
