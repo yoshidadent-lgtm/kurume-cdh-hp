@@ -13,10 +13,18 @@ SLUG = {'school': 'about', 'dental-hygienist': 'dental-hygienist', 'flow': 'flow
         'document-request': 'document-request', 'school-tour': 'school-tour', 'document': 'document', 'reunion_mail': 'alumni',
         'equipment': 'facilities', 'interview': 'interview', 'faq': 'faq', 'page-2465': 'dormitory', 'page-2482': 'results'}
 # 旧サイトの画像 → 新サイトで使う画像（ユーザーから受領したもののみ）。ここにない画像は取り込まない。
-IMGMAP = {'images/dental-hygn/job_img01.jpg': ('assets/images/dental-hygienist/job-prevention.jpg', '歯科予防処置の実習の様子'),
-          'images/dental-hygn/job_img02.jpg': ('assets/images/dental-hygienist/job-assistant.jpg', '歯科診療補助の実習の様子'),
-          'images/dental-hygn/job_img03.jpg': ('assets/images/dental-hygienist/job-guidance.jpg', '歯科保健指導の実習の様子'),
-          'images/dental-hygn/job_img04.jpg': ('assets/images/dental-hygienist/job-oralcare.jpg', '口腔健康管理の実習の様子')}
+IMGMAP = {  # 旧パス: (新パス, alt, 幅, 高さ, class)
+    'images/dental-hygn/job_img01.jpg': ('assets/images/dental-hygienist/job-prevention.jpg', '歯科予防処置の実習の様子', 500, 417, 'photo'),
+    'images/dental-hygn/job_img02.jpg': ('assets/images/dental-hygienist/job-assistant.jpg', '歯科診療補助の実習の様子', 500, 417, 'photo'),
+    'images/dental-hygn/job_img03.jpg': ('assets/images/dental-hygienist/job-guidance.jpg', '歯科保健指導の実習の様子', 500, 417, 'photo'),
+    'images/dental-hygn/job_img04.jpg': ('assets/images/dental-hygienist/job-oralcare.jpg', '口腔健康管理の実習の様子', 500, 417, 'photo'),
+    # 「卒業までの流れ」。対応は、旧サイトの並び順（flow_02t〜05t）からの推定。要確認。
+    'images/admission/flow_05t.jpg': ('assets/images/flow/year1.jpg', '1年次の授業の様子', 320, 214, 'photo small'),
+    'images/admission/flow_02t.jpg': ('assets/images/flow/year2.jpg', '2年次の実習の様子', 320, 240, 'photo small'),
+    'images/admission/flow_04t.jpg': ('assets/images/flow/year3.jpg', '3年次の授業の様子', 320, 243, 'photo small'),
+    'images/admission/flow_03t.jpg': ('assets/images/flow/career.jpg', '学生のグループ活動の様子', 320, 240, 'photo small'),
+    'images/dental-hyg_img02.png': ('assets/images/flow/school-life.webp', '学校行事（ボウリング大会・修学旅行・スポーツ大会）の様子', 1000, 500, 'photo'),
+}
 KEEP = {'p','h2','h3','h4','h5','ul','ol','li','table','thead','tbody','tr','th','td','a','strong','b','em','br','dl','dt','dd','blockquote'}
 DROP = {'script','style','iframe','img','form','input','button','select','textarea','svg','noscript','video','audio'}
 PENDING = '<p class="pending">（準備中）この部分は、新サイトで作り直します。</p>'
@@ -26,7 +34,7 @@ class Clean(HTMLParser):
     def handle_starttag(self, t, a):
         if t == 'img':
             m = IMGMAP.get(dict(a).get('src') or '')
-            if m and not self.skip: self.out.append('<img class="photo" src="{{R}}%s" alt="%s" loading="lazy" width="500" height="417">' % m)
+            if m and not self.skip: self.out.append('<img class="%s" src="{{R}}%s" alt="%s" loading="lazy" width="%d" height="%d">' % (m[4], m[0], m[1], m[2], m[3]))
             return
         if t in DROP: self.skip += 1 if t not in ('img','input') else 0; return
         if self.skip: return

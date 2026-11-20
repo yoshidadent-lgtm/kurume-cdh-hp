@@ -61,3 +61,7 @@
 - ユーザーから、仕事の写真4枚（`assets/images/dental-hygienist/`）、茶色の校舎アイコン（`assets/images/school-icon-brown.svg`）、学生の切り抜き（`assets/images/students.png`）を受領し、サイトに配置した。
 - 写真には、本校の学生が写っている。掲載の同意は、学校側で確認済みのものとして扱う（要確認）。
 - インポーターの画像は、`tools/import_wp.py` の `IMGMAP` に載せたものだけを取り込む。画像が増えたら、`IMGMAP` に足す。
+
+## 受領した画像（2回目、2026-11-20）
+- 「卒業までの流れ」用の写真4枚（`assets/images/flow/year1〜3.jpg`、`career.jpg`）と学校行事の画像（`school-life.webp`）。対応は推定。違っていれば `IMGMAP` を直す。
+- 学校行事の画像には、学生が写っている（水着・水上の活動を含む）。掲載の同意は、学校側で確認済みのものとして扱う（要確認）。

@@ -90,3 +90,9 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - `images/shool_icon_brown.svg`（茶色の校舎アイコン）→ `assets/images/school-icon-brown.svg`。トップの特長カードに使用。
 - 2人の学生の切り抜き画像（旧サイトのどのファイルか未確認）→ `assets/images/students.png`。トップの先頭に使用。
 - 上記は、一覧の「テーマの画像」から、受領済みとして外してよい（残り：29点）。
+
+## 8. 受領済み（2026-11-20、2回目）
+- `images/admission/flow_02t〜05t.jpg`（4点）、`images/dental-hyg_img02.png`（学校行事の画像。受領は webp）→ `assets/images/flow/`。「卒業までの流れ」に使用。
+- 4点の対応（1年・2年・3年・進路）は、旧サイトの並び順からの**推定**。違っていれば、`tools/import_wp.py` の `IMGMAP` を直す。
+- 学校行事の画像の対応（`dental-hyg_img02.png`）も、推定。
+- 「テーマの画像」の残りは、24点。
