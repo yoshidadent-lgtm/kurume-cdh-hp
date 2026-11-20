@@ -84,3 +84,9 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 
 ## 6. 載せないもの（ユーザー決定 2026-11-19）
 - 在校生・講師の写真（「講師・在校生インタビュー」ページの写真10点：`realvoice/st_vo_img11〜13.jpg`、`st_tc_img01〜04.jpg`、`uploads/2022/06/` の3点）。文章は載せる。
+
+## 7. 受領済み（2026-11-20、ユーザーから）
+- `images/dental-hygn/job_img01〜04.jpg`（歯科衛生士の4つの仕事の写真）→ `assets/images/dental-hygienist/` に配置済み。
+- `images/shool_icon_brown.svg`（茶色の校舎アイコン）→ `assets/images/school-icon-brown.svg`。トップの特長カードに使用。
+- 2人の学生の切り抜き画像（旧サイトのどのファイルか未確認）→ `assets/images/students.png`。トップの先頭に使用。
+- 上記は、一覧の「テーマの画像」から、受領済みとして外してよい（残り：29点）。

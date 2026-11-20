@@ -12,6 +12,11 @@ SLUG = {'school': 'about', 'dental-hygienist': 'dental-hygienist', 'flow': 'flow
         'curriculum': 'curriculum', 'access': 'access', 'contact': 'contact', 'opencampus-contact': 'opencampus',
         'document-request': 'document-request', 'school-tour': 'school-tour', 'document': 'document', 'reunion_mail': 'alumni',
         'equipment': 'facilities', 'interview': 'interview', 'faq': 'faq', 'page-2465': 'dormitory', 'page-2482': 'results'}
+# 旧サイトの画像 → 新サイトで使う画像（ユーザーから受領したもののみ）。ここにない画像は取り込まない。
+IMGMAP = {'images/dental-hygn/job_img01.jpg': ('assets/images/dental-hygienist/job-prevention.jpg', '歯科予防処置の実習の様子'),
+          'images/dental-hygn/job_img02.jpg': ('assets/images/dental-hygienist/job-assistant.jpg', '歯科診療補助の実習の様子'),
+          'images/dental-hygn/job_img03.jpg': ('assets/images/dental-hygienist/job-guidance.jpg', '歯科保健指導の実習の様子'),
+          'images/dental-hygn/job_img04.jpg': ('assets/images/dental-hygienist/job-oralcare.jpg', '口腔健康管理の実習の様子')}
 KEEP = {'p','h2','h3','h4','h5','ul','ol','li','table','thead','tbody','tr','th','td','a','strong','b','em','br','dl','dt','dd','blockquote'}
 DROP = {'script','style','iframe','img','form','input','button','select','textarea','svg','noscript','video','audio'}
 PENDING = '<p class="pending">（準備中）この部分は、新サイトで作り直します。</p>'
@@ -19,6 +24,10 @@ PENDING = '<p class="pending">（準備中）この部分は、新サイトで�
 class Clean(HTMLParser):
     def __init__(self): super().__init__(convert_charrefs=True); self.out = []; self.skip = 0; self.stack = []
     def handle_starttag(self, t, a):
+        if t == 'img':
+            m = IMGMAP.get(dict(a).get('src') or '')
+            if m and not self.skip: self.out.append('<img class="photo" src="{{R}}%s" alt="%s" loading="lazy" width="500" height="417">' % m)
+            return
         if t in DROP: self.skip += 1 if t not in ('img','input') else 0; return
         if self.skip: return
         if t == 'h1': t = 'h2'
