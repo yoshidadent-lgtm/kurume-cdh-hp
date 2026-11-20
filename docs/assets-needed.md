@@ -191,3 +191,6 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - `dental-hygn/whats_img01.jpg`（スーツ姿の学生5人）→ `assets/images/shared/students-suits.jpg`。
 - 2点とも、学校案内と歯科衛生士についてのページで使われる（旧サイトと同じ位置）。
 - 「テーマの画像」の必要分の残りは、4点：`school/school_point_img05_new.jpg`、`school_point_img06.jpg`、`realvoice/rl_vo_img11.jpg`、`rl_vo_sub11.png`。
+
+## 24. 受け取った文章（2026-11-20）
+- 学校長挨拶（`principal-message`）→ 学校案内の「学校長メッセージ」。学校案内の「（準備中）」は、残り2箇所（`school_file`＝カリキュラム、「大学等修学支援法による公開情報」）。

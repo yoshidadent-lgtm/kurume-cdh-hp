@@ -115,6 +115,12 @@ def fixlink(h):
 # NextGEN Gallery（[ngg ... ids="N"]）→ 受領した写真のギャラリー。ids と受領したフォルダの対応（旧サイトの本文の並び順と、ZIPの名前の番号が一致）
 NGG = {'1': ('shinsatsu', '診察室'), '3': ('hall', '多目的大ホール'), '4': ('library', '2F図書室'), '5': ('kiso', '4F基礎実習室'), '6': ('shinkan', '新館教室')}
 
+# テーマ側（[call_php file=...]）にあった文章のうち、ユーザーから受け取ったもの。ファイル名 → HTML
+PROVIDED = {'principal-message': '''<p>歯科衛生士は国家資格であり社会より求められる職業です。<br>
+高齢化社会の到来により、口腔内の管理が体全体の健康の維持、健康寿命の延長に繋がることが認識されています。一般歯科のみならず、介護の現場でも歯科衛生士の重要性、需要は増加しています。</p>
+<p>久留米歯科衛生専門学校では時代に即したカリキュラム、最新の設備、歯科医師会立を生かした経験ある講師陣、豊富な実習病院、学びやすい学費の設定で歯科衛生士を志す皆さんを受け入れております。</p>
+<p>本校では将来、仕事に誇りを持ち充実した生活を送れるように、必要な知識を深め、人としての信頼を得ることが出来る人材を育成することが私どもの使命と考えており、歯科衛生士という国家資格を取得し将来活躍するための基礎力と実践力の取得を目指します。</p>'''}
+
 def gallery_html(gid):
     from PIL import Image
     d, name = NGG[gid]; base = ROOT / 'assets/images/facilities' / d
@@ -127,6 +133,11 @@ def gallery_html(gid):
 
 def clean(src):
     galleries = {}
+    def _p(m):
+        k = '@@PROVIDED-%s@@' % m.group(1)
+        if m.group(1) in PROVIDED: galleries[k] = PROVIDED[m.group(1)]; return k
+        return m.group(0)
+    src = re.sub(r"\[call_php\s+file=[\"']([^\"']+)[\"']\s*\]", _p, src)
     def _g(m):
         k = '@@GALLERY%s@@' % m.group(1)
         if m.group(1) in NGG: galleries[k] = gallery_html(m.group(1)); return k
