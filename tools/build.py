@@ -62,3 +62,14 @@ write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="htt
       + ''.join('<url><loc>%s</loc></url>\n' % u for u in urls) + '</urlset>\n')
 write('robots.txt', 'User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n' % site['origin'])
 print('生成しました：%d ページ' % len(urls))
+
+# 公開前の警告：本文に「【要確認」「（準備中）」が残っていないか
+import re as _re
+_left = {}
+for _f in ROOT.rglob('index.html'):
+    if 'templates' in _f.parts: continue
+    _h = _f.read_text(encoding='utf-8')
+    for _k in ('【要確認', '（準備中）'):
+        _n = len(_re.findall(_re.escape(_k), _h))
+        if _n: _left.setdefault(_k, []).append('%s(%d)' % (_f.parent.name or 'top', _n))
+for _k, _v in _left.items(): print('注意：%s が残っているページ：%s' % (_k, '、'.join(_v)))
