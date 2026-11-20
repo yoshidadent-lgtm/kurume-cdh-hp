@@ -27,7 +27,17 @@ IMGMAP = {  # 旧パス: (新パス, alt, 幅, 高さ, class)
     # 「就職について」の卒業生インタビュー。対応は、内容（久留米）からの推定。要確認。img04・sub04（オーストラリア勤務）は、旧サイトでコメントアウトされ非表示のため、載せない。
     'images/realvoice/rl_vo_sub12.png': ('assets/images/career/voice2-workplace.png', '卒業生の勤務先の様子（久留米市内）', 360, 178, 'photo small'),
     'images/realvoice/rl_vo_img12.jpg': ('assets/images/career/voice2-portrait.jpg', '歯科衛生士の卒業生', 407, 423, 'photo small'),
+    'images/access/access.png': ('assets/images/access/access.png', '最寄駅から学校までのアクセス図（詳細は下の文章をご覧ください）', 602, 282, 'photo'),
+    'images/canpus_image1.png': ('assets/images/opencampus/opencampus.webp', 'オープンキャンパスの様子', 1002, 387, 'photo'),
 }
+# ページ末尾に足す文章（旧サイトの iframe の地図は、外部読み込みになるため、リンクに替える）
+APPEND = {'access': '''<section><h3>最寄駅・空港からのアクセス（図の内容）</h3><ul>
+<li>福岡空港 → 久留米インター：45分 → 学校：車で15分</li>
+<li>JR鹿児島本線 博多駅 → JR久留米駅：特急で30分 → 学校：徒歩20分、車で5分</li>
+<li>西鉄大牟田線 福岡（天神）駅 → 西鉄久留米駅：特急で30分 → 学校：徒歩20分、車で5分</li>
+<li>西鉄大牟田線 大牟田駅 → 西鉄久留米駅：特急で30分</li>
+<li>西鉄櫛原駅 → 学校：徒歩10分</li></ul>
+<p><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E6%A0%9F%E5%8E%9F%E7%94%BA98" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></section>'''}
 KEEP = {'p','h2','h3','h4','h5','ul','ol','li','table','thead','tbody','tr','th','td','a','strong','b','em','br','dl','dt','dd','blockquote'}
 DROP = {'script','style','iframe','img','form','input','button','select','textarea','svg','noscript','video','audio'}
 PENDING = '<p class="pending">（準備中）この部分は、新サイトで作り直します。</p>'
@@ -89,7 +99,7 @@ def main(path):
         if st != 'publish' or pw: continue
         title, body = (i.findtext('title') or '').strip(), g(i, 'content:encoded') or ''
         if t == 'page' and g(i, 'wp:post_name') in SLUG:
-            pages.append({'slug': SLUG[g(i, 'wp:post_name')], 'title': title, 'lead': '', 'body': '<section>%s</section>' % clean(body), 'old_slug': g(i, 'wp:post_name')})
+            pages.append({'slug': SLUG[g(i, 'wp:post_name')], 'title': title, 'lead': '', 'body': '<section>%s</section>' % clean(body) + APPEND.get(SLUG[g(i, 'wp:post_name')], ''), 'old_slug': g(i, 'wp:post_name')})
         elif t == 'post':
             news.append({'date': g(i, 'wp:post_date')[:10], 'title': title, 'body': clean(body), 'id': g(i, 'wp:post_id')})
     order = list(SLUG.values()); pages.sort(key=lambda p: order.index(p['slug'])); news.sort(key=lambda n: n['date'], reverse=True)

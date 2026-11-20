@@ -102,3 +102,10 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - `rl_vo_img12.jpg`（卒業生の写真、推定）→ `assets/images/career/voice2-portrait.jpg`
 - Modern Orthodontics（オーストラリア）の画像は、旧サイトのHTMLでコメントアウトされ（非表示）、文章もない。新サイトには載せない。ファイルも置いていない。
 - 未受領：`rl_vo_img11.jpg`、`rl_vo_sub11.png`（東京の歯科医院に勤務する卒業生。旧サイトで表示されているもの）。
+
+## 10. 受領済み（2026-11-20、4回目）
+- `images/access/access.png`（アクセス図）→ `assets/images/access/access.png`。アクセスのページ。図の内容を文章でも載せた。
+- `images/canpus_image1.png`（受領は webp）→ `assets/images/opencampus/opencampus.webp`。オープンキャンパスのページ。
+- `images/shool_icon_white.svg`（白い校舎アイコン）は受領したが、旧サイトで色付きの帯の上に載せていたもの。今のデザインにはその帯がないので、使っていない（ファイルも置いていない）。
+- アクセスの地図は、旧サイトのGoogleマップの埋め込み（iframe）をやめ、「Googleマップで見る」のリンクにした（外部読み込みを避けるため）。
+- 「テーマの画像」の残りは、22点。

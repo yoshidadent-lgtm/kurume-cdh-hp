@@ -45,7 +45,7 @@
   "slug": "access",
   "title": "アクセス",
   "lead": "",
-  "body": "<section>久留米歯科衛生専門学校アクセス\n    \n    <h2>ACCESS</h2>\n   \n<p>〒830-0013福岡県久留米市櫛原町98</p>\n<p>最寄駅から徒歩10分<br>\n天神・博多まで電車で30分です。</p>\n   \n\t\n\n\n\t<br><br></section>",
+  "body": "<section>久留米歯科衛生専門学校アクセス\n    \n    <h2>ACCESS</h2>\n   \n<p>〒830-0013福岡県久留米市櫛原町98</p>\n<p>最寄駅から徒歩10分<br>\n天神・博多まで電車で30分です。</p>\n   \n\t\n\n<img class=\"photo\" src=\"{{R}}assets/images/access/access.png\" alt=\"最寄駅から学校までのアクセス図（詳細は下の文章をご覧ください）\" loading=\"lazy\" width=\"602\" height=\"282\">\n\t<br><br></section><section><h3>最寄駅・空港からのアクセス（図の内容）</h3><ul>\n<li>福岡空港 → 久留米インター：45分 → 学校：車で15分</li>\n<li>JR鹿児島本線 博多駅 → JR久留米駅：特急で30分 → 学校：徒歩20分、車で5分</li>\n<li>西鉄大牟田線 福岡（天神）駅 → 西鉄久留米駅：特急で30分 → 学校：徒歩20分、車で5分</li>\n<li>西鉄大牟田線 大牟田駅 → 西鉄久留米駅：特急で30分</li>\n<li>西鉄櫛原駅 → 学校：徒歩10分</li></ul>\n<p><a class=\"btn\" href=\"https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E6%A0%9F%E5%8E%9F%E7%94%BA98\" target=\"_blank\" rel=\"noopener noreferrer\">Googleマップで見る</a></p></section>",
   "old_slug": "access"
  },
  {
@@ -59,7 +59,7 @@
   "slug": "opencampus",
   "title": "オープンキャンパスのお申込み",
   "lead": "",
-  "body": "<section>オープンキャンパスのお申込み\n    \n    <h2>OPEN CAMPUS</h2>\n    \n     \n    \n<p>オープンキャンパスのお申込みの方は、下記フォームに必須事項を入力し、送信してください。なお、準備の都合上、各開催日の３日前にエントリーの締め切りをさせて頂きます。</p>\n\n<p class=\"pending\">（準備中）この部分は、新サイトで作り直します。</p></section>",
+  "body": "<section>オープンキャンパスのお申込み\n    \n    <h2>OPEN CAMPUS</h2>\n    \n     <img class=\"photo\" src=\"{{R}}assets/images/opencampus/opencampus.webp\" alt=\"オープンキャンパスの様子\" loading=\"lazy\" width=\"1002\" height=\"387\">\n    \n<p>オープンキャンパスのお申込みの方は、下記フォームに必須事項を入力し、送信してください。なお、準備の都合上、各開催日の３日前にエントリーの締め切りをさせて頂きます。</p>\n\n<p class=\"pending\">（準備中）この部分は、新サイトで作り直します。</p></section>",
   "old_slug": "opencampus-contact"
  },
  {
