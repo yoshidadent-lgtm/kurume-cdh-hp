@@ -156,6 +156,35 @@ PROVIDED['school-curriculum'] = '''<h4>一般教育</h4>
 本校では、優秀な教員に加え大学教授陣の指導のもと、豊富な実習・講義により社会ですぐに役立つ実践力を身に付けます。</p>
 <p>1年生に歯科医学に関する 基礎から徐々に専門的な歯科知識と技術を習得し、2・3年生には校内の除石実習、 校外では大学付属病院・歯科医院・老人保健施設などで臨床実習を行います。 介護職員初任者研修資格習得やコンピュータによる実習など、より深く実践的に学びます。歯科衛生士の質の向上および地位の向上に努め、国家試験合格を目指します。</p>
 <p><strong>［科目］</strong><br>歯科衛生士概論・解剖学・口腔解剖学・組織学・生理学・病理学・微生物学・薬理学・口腔衛生学・公衆衛生学・栄養指導・衛生行政・社会福祉・歯科臨床概論・歯科保存修復学・歯科補綴学・口腔外科学・小児歯科学・歯科矯正学・歯科予防処置・歯科診療補助・歯科保健指導・臨床実習</p>'''
+# PDFの一覧（リンク）。ファイルの大きさとページ数は、ファイルから数える。
+def pdf_list(rows):
+    from pypdf import PdfReader
+    import os
+    out = []
+    for path, title in rows:
+        f = ROOT / path; kb = os.path.getsize(f) / 1024
+        size = ('%.1fMB' % (kb / 1024)) if kb >= 1024 else ('%dKB' % round(kb))
+        out.append('<li><a href="{{R}}%s" target="_blank" rel="noopener">%s</a>（PDF・%dページ・%s）</li>' % (path, title, len(PdfReader(f).pages), size))
+    return '<ul class="files">%s</ul>' % ''.join(out)
+
+# 学校案内「大学等修学支援法による公開情報」（school_file）。ユーザーから受領したPDF。貸借対照表は、手書きのメモ・蛍光ペンのある写しだったため、保留。
+PROVIDED['school_file'] = pdf_list([
+    ('assets/pdf/disclosure/01-faculties-overview.pdf', '確認申請を行う年度において設置している学部等の一覧・学校概要'),
+    ('assets/pdf/disclosure/02-practical-experience-teachers.pdf', '実務経験のある教員等の授業科目一覧'),
+    ('assets/pdf/disclosure/03-form-2.pdf', '様式第2号（実務経験のある教員等による授業科目の配置、外部人材の意見、成績評価の方針、財務・経営情報、学生の支援状況など）'),
+    ('assets/pdf/disclosure/04-syllabus.pdf', '授業計画（教授要綱）'),
+    ('assets/pdf/disclosure/05-graduation-policy.pdf', '卒業認定に関する方針'),
+    ('assets/pdf/disclosure/06-grade-distribution-r7.pdf', '客観的な指標に基づく成績の分布状況を示す資料（令和7年度 第1学年）'),
+    ('assets/pdf/disclosure/07-business-report-r7.pdf', '事業報告書（令和7年度）一般社団法人久留米歯科医師会'),
+    ('assets/pdf/disclosure/08-audit-report-r7.pdf', '監査報告（令和7年度）一般社団法人久留米歯科医師会'),
+    ('assets/pdf/disclosure/09-profit-loss-r5-r7.pdf', '損益計算書（令和5〜7年度）久留米歯科衛生専門学校'),
+    ('assets/pdf/disclosure/10-net-assets-statement-r5-r7.pdf', '正味財産増減計算書内訳表（令和5〜7年度）'),
+])
+# 求人・見学実習ページ「見学実習資料」（recruitng_file3）
+PROVIDED['recruitng_file3'] = pdf_list([
+    ('assets/pdf/forms/visit-practice-request.pdf', '本校学生の見学実習について（お願い）'),
+    ('assets/pdf/forms/visit-practice-application.pdf', '見学実習生申込書'),
+])
 PROVIDED['admission_qualifications'] = '''<ul>
 <li>高等学校卒業者及び同等の資格を有する者、または2027年（令和9年）3月に高等学校卒業見込みの方</li>
 <li>文部科学大臣が指定した方</li></ul>'''
@@ -216,6 +245,8 @@ def clean(src):
     if not re.search(r'<(p|h\d|ul|ol|table|dl)\b', out): out = '<p>%s</p>' % out
     return out.strip()
 
+TEXT_FIXES = [('(1962年)', '(1947年)')]   # 沿革「昭和22年」は1947年（「学部等の一覧・学校概要」のPDFで確認）
+
 def main(path):
     ch = ET.parse(path).getroot().find('channel'); g = lambda i, k: i.findtext(k, namespaces=ns)
     pages, news = [], []
@@ -228,6 +259,8 @@ def main(path):
             pages.append({'slug': SLUG[g(i, 'wp:post_name')], 'title': title, 'lead': '', 'body': '<section>%s</section>' % clean(body) + APPEND.get(SLUG[g(i, 'wp:post_name')], ''), 'old_slug': g(i, 'wp:post_name')})
         elif t == 'post':
             news.append({'date': g(i, 'wp:post_date')[:10], 'title': title, 'body': clean(body) + NEWS_APPEND.get(g(i, 'wp:post_id'), ''), 'id': g(i, 'wp:post_id')})
+    for pg in pages:
+        for a, b in TEXT_FIXES: pg['body'] = pg['body'].replace(a, b)
     order = list(SLUG.values()); pages.sort(key=lambda p: order.index(p['slug'])); news.sort(key=lambda n: n['date'], reverse=True)
     (ROOT/'data/imported_pages.json').write_text(json.dumps(pages, ensure_ascii=False, indent=1), encoding='utf-8')
     (ROOT/'data/news.json').write_text(json.dumps(news, ensure_ascii=False, indent=1), encoding='utf-8')
