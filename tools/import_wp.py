@@ -51,6 +51,10 @@ APPEND = {'dormitory': '''<section><p><a href="{{R}}assets/images/dormitory/vill
 <li>西鉄大牟田線 大牟田駅 → 西鉄久留米駅：特急で30分</li>
 <li>西鉄櫛原駅 → 学校：徒歩10分</li></ul>
 <p><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E6%A0%9F%E5%8E%9F%E7%94%BA98" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></section>'''}
+NEWS_APPEND = {'3022': '''<p><a href="{{R}}assets/images/news/parking-map-2026.webp"><img class="photo" src="{{R}}assets/images/news/parking-map-2026.webp" alt="本校駐車場の案内図。駐車場は①②の2か所。詳しくは下の文章をご覧ください。" loading="lazy" width="2000" height="1414"></a></p>
+<ul><li>お車でお越しの際には、駐車場がありますので、お気をつけてご来校ください。</li>
+<li>道幅が狭いので、ご注意ください。</li>
+<li>7:00〜9:00、16:00〜18:00 の時間帯は、図の赤い矢印の向きのみの一方通行です。</li></ul>'''}
 TITLES = {'page-2465': '女子指定寮のご案内'}  # 旧サイトの管理用の名前（外部広告（女子寮））を、公開向けの見出しに替える
 KEEP = {'p','h2','h3','h4','h5','ul','ol','li','table','thead','tbody','tr','th','td','a','strong','b','em','br','dl','dt','dd','blockquote'}
 DROP = {'script','style','iframe','img','form','input','button','select','textarea','svg','noscript','video','audio'}
@@ -83,8 +87,12 @@ class Clean(HTMLParser):
     def handle_data(self, d):
         if not self.skip: self.out.append(re.sub(r'\n\s*\n', '<br><br>', html.escape(d)))
 
+LOCAL_FILES = {'ParkingMap2026ver2.png': 'assets/images/news/parking-map-2026.webp'}
+
 def fixlink(h):
     h = h.replace('[hurl]', '')
+    for k, v in LOCAL_FILES.items():
+        if h.endswith('/' + k): return '{{R}}' + v
     m = re.match(r'https?://(?:www\.)?kurume-dental\.or\.jp/kdhs/?(.*)$', h)
     if m or not h.startswith(('http', 'mailto', 'tel')):
         path = (m.group(1) if m else h).strip('/').split('/')[-1]
@@ -116,7 +124,7 @@ def main(path):
         if t == 'page' and g(i, 'wp:post_name') in SLUG:
             pages.append({'slug': SLUG[g(i, 'wp:post_name')], 'title': title, 'lead': '', 'body': '<section>%s</section>' % clean(body) + APPEND.get(SLUG[g(i, 'wp:post_name')], ''), 'old_slug': g(i, 'wp:post_name')})
         elif t == 'post':
-            news.append({'date': g(i, 'wp:post_date')[:10], 'title': title, 'body': clean(body), 'id': g(i, 'wp:post_id')})
+            news.append({'date': g(i, 'wp:post_date')[:10], 'title': title, 'body': clean(body) + NEWS_APPEND.get(g(i, 'wp:post_id'), ''), 'id': g(i, 'wp:post_id')})
     order = list(SLUG.values()); pages.sort(key=lambda p: order.index(p['slug'])); news.sort(key=lambda n: n['date'], reverse=True)
     (ROOT/'data/imported_pages.json').write_text(json.dumps(pages, ensure_ascii=False, indent=1), encoding='utf-8')
     (ROOT/'data/news.json').write_text(json.dumps(news, ensure_ascii=False, indent=1), encoding='utf-8')

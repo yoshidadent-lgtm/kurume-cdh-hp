@@ -2,7 +2,7 @@
  {
   "date": "2026-09-24",
   "title": "本校駐車場のご案内",
-  "body": "<p>車で本校へご来場される方への駐車場をご案内します。<br><br>以下のリンクよりご確認のうえ、ご来校ください。<br><br>こちらをクリック　<a href=\"https://kurume-dental.or.jp/kdhs/wp-content/uploads/2026/09/ParkingMap2026ver2.png\">ParkingMap2026</a></p>",
+  "body": "<p>車で本校へご来場される方への駐車場をご案内します。<br><br>以下のリンクよりご確認のうえ、ご来校ください。<br><br>こちらをクリック　<a href=\"{{R}}assets/images/news/parking-map-2026.webp\">ParkingMap2026</a></p><p><a href=\"{{R}}assets/images/news/parking-map-2026.webp\"><img class=\"photo\" src=\"{{R}}assets/images/news/parking-map-2026.webp\" alt=\"本校駐車場の案内図。駐車場は①②の2か所。詳しくは下の文章をご覧ください。\" loading=\"lazy\" width=\"2000\" height=\"1414\"></a></p>\n<ul><li>お車でお越しの際には、駐車場がありますので、お気をつけてご来校ください。</li>\n<li>道幅が狭いので、ご注意ください。</li>\n<li>7:00〜9:00、16:00〜18:00 の時間帯は、図の赤い矢印の向きのみの一方通行です。</li></ul>",
   "id": "3022"
  },
  {
