@@ -89,7 +89,7 @@ class Clean(HTMLParser):
     def handle_data(self, d):
         if not self.skip: self.out.append(re.sub(r'\n\s*\n', '<br><br>', html.escape(d)))
 
-LOCAL_FILES = {'admission2026001.pdf': 'assets/pdf/admission-2026-essay-topics.pdf', 'ParkingMap2026ver2.png': 'assets/images/news/parking-map-2026.webp'}
+LOCAL_FILES = {'1P-2P2025.pdf': 'assets/pdf/hogosha-2025-1p-2p.pdf', '3P-4P2025.pdf': 'assets/pdf/hogosha-2025-3p-4p.pdf', '5P-6P2025.pdf': 'assets/pdf/hogosha-2025-5p-6p.pdf', '7P-8P2025.pdf': 'assets/pdf/hogosha-2025-7p-8p.pdf', '9P-10P2025.pdf': 'assets/pdf/hogosha-2025-9p-10p.pdf', 'admission2026001.pdf': 'assets/pdf/admission-2026-essay-topics.pdf', 'ParkingMap2026ver2.png': 'assets/images/news/parking-map-2026.webp'}
 
 def fixlink(h):
     h = h.replace('[hurl]', '')
