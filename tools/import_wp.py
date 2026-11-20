@@ -146,8 +146,8 @@ for _k, _v in ADMISSION_IMG.items():
     PROVIDED[_k] = ''.join(doc_img(n, a) for n, a in _v)
 # 文章で受け取った・読み取った部分
 # ユーザーから受領（旧サイトの管理画面の内容。2026-11-20）。文言は、受領したとおり。
-# 学校案内の「カリキュラム」（school_file）。ユーザーから受領（旧サイトの管理画面の内容、2026-11-20）。
-PROVIDED['school_file'] = '''<h4>一般教育</h4>
+# 学校案内の「カリキュラム」（school-curriculum）。ユーザーから受領（旧サイトの管理画面の内容、2026-11-20）。
+PROVIDED['school-curriculum'] = '''<h4>一般教育</h4>
 <p>幅広い視野と教養を身につけるため、人文科学・社会科学・自然科学・ 外国語をカリキュラムに組み込んでいます。<br>
 また、OA化時代に対応するICT学習、歯科医師のアシスタントとしての秘書教育など一般 社会でも優秀な人材となるよう教育しています。</p>
 <p><strong>［科目］</strong><br>心理学・倫理学・生物学・化学・英会話・情報処理論</p>
@@ -191,6 +191,7 @@ def gallery_html(gid):
 
 def clean(src):
     galleries = {}
+    src = src.replace('[hurl]', 'https://kurume-dental.or.jp/kdhs/')   # 旧テーマの内部リンクの印。他の仮記号と間違えて消されないよう、先に変換する
     def _p(m):
         k = '@@PROVIDED-%s@@' % m.group(1)
         if m.group(1) in PROVIDED: galleries[k] = PROVIDED[m.group(1)]; return k
