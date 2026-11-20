@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """静的サイトの生成。data/ と templates/ から HTML・sitemap.xml・robots.txt・404.html を作る。
 使い方: python3 tools/build.py（Python標準ライブラリのみ）"""
-import json, html, datetime, pathlib
+import json, html, datetime, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 site = json.loads((ROOT/'data/site.json').read_text(encoding='utf-8'))
 pages = json.loads((ROOT/'data/pages.json').read_text(encoding='utf-8'))
@@ -16,19 +16,25 @@ def news_html(R, limit=5):
     if not news: return '<p>お知らせはありません。</p>'
     return '<ul class="news">' + ''.join('<li><span>%s</span> <a href="%snews/%s/">%s</a></li>' % (n['date'].replace('-', '.'), R, n['id'], e(n['title'])) for n in news[:limit]) + '</ul>'
 
+def describe(body, fallback):
+    # 本文の最初の部分から、説明文（約110文字）を作る。取れなければ、サイト全体の説明文。
+    txt = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', re.sub(r'<(script|style)[^>]*>.*?</\1>', '', body, flags=re.S)))).strip()
+    txt = re.sub(r'（準備中）[^。]*。', '', txt).replace('【要確認', '').strip()
+    return (txt[:108] + '…') if len(txt) > 110 else (txt or fallback)
+
 def render(slug, title, lead, body, depth, canon_path):
     R = '../' * depth
     nav = ''.join('<a href="%s%s/"%s>%s</a>' % (R, s, ' aria-current="page"' if s == slug else '', e(t)) for s, t in site['nav'])
     page = tpl('header.html') + body + tpl('footer.html')
     page = page.replace('{{NEWS}}', news_html(R))
     full = site['name_ja'] if not slug else '%s | %s' % (title, site['name_ja'])
-    rep = {'{{TITLE}}': e(full), '{{DESC}}': e(site['description']), '{{CANON}}': site['origin'] + canon_path,
+    rep = {'{{TITLE}}': e(full), '{{DESC}}': e(describe(body, site['description']) if slug not in ('',) else site['description']), '{{CANON}}': site['origin'] + canon_path,
            '{{NAV}}': nav, '{{FNAV}}': ' / '.join('<a href="%s%s/">%s</a>' % (R, s, e(n)) for s, n in site.get('footer_nav', [])), '{{NAME_JA}}': e(site['name_ja']), '{{NAME_EN}}': e(site['name_en']),
            '{{H1}}': e(title if slug else site['name_en']), '{{LEAD}}': e(lead), '{{ADDRESS}}': e(site['address']),
            '{{TEL}}': e(site['tel']), '{{YEAR}}': YEAR, '{{R}}': R}
     for k, v in rep.items():
         page = page.replace(k, v)
-    return page
+    return page.replace('href=""', 'href="./"')
 
 def write(rel, text):
     f = ROOT / rel; f.parent.mkdir(parents=True, exist_ok=True); f.write_text(text, encoding='utf-8')

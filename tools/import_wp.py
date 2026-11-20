@@ -235,6 +235,14 @@ def clean(src):
     src = re.sub(r"\[(?:ngg|contact-form-7|gallery|[a-z_]+)[^\]]*\]", '@@PENDING@@', src)
     c = Clean(); c.feed(src); out = ''.join(c.out).replace('@@PENDING@@', PENDING)
     for k, v in galleries.items(): out = out.replace(k, v)
+    out = re.sub(r'<(ul|ol)>\s*(<(?:ul|ol)>)', r'\2', out); out = re.sub(r'(</(?:ul|ol)>)\s*</(?:ul|ol)>', r'\1', out)   # 旧サイトの <ul> の中に <ul> が入る形を直す
+    out = re.sub(r'((?:\s*<a href="[^"]*">[^<]{1,24}</a>){3,})',
+                 lambda m: '<p class="btnrow">%s</p>' % re.sub(r'<a href=', '<a class="btn sub" href=', m.group(1).strip()), out)
+    # 見出し・リスト・表などの前後にある、余分な改行（<br>）を取る（旧サイトの文章に多い）
+    out = re.sub(r'(?:<br>\s*)+(?=<(?:h[2-6]|ul|ol|p|table|div|section)\b)', '', out)
+    out = re.sub(r'(</(?:h[2-6]|ul|ol|p|table|div|section)>)\s*(?:<br>\s*)+', r'\1', out)
+    out = re.sub(r'(?:<br>\s*)+$', '', out.strip())
+    out = re.sub(r'<(ul|ol)>\s*</\1>', '', out)                                                    # 空のリスト
     out = re.sub(r'<(\w+)>\s*</\1>', '', out)                      # 空タグ
     out = re.sub(r'<p>\s*(<p class="pending">.*?</p>)\s*</p>', r'\1', out, flags=re.S)
     if '<li>' not in out: out = re.sub(r'</?(ul|ol)>', '', out)
@@ -245,7 +253,22 @@ def clean(src):
     if not re.search(r'<(p|h\d|ul|ol|table|dl)\b', out): out = '<p>%s</p>' % out
     return out.strip()
 
-TEXT_FIXES = [('(1962年)', '(1947年)')]   # 沿革「昭和22年」は1947年（「学部等の一覧・学校概要」のPDFで確認）
+TEXT_FIXES = [('(1962年)', '(1947年)'),
+              # 旧サイトの文章の、明らかな誤字・重複（2026-11-20 の点検で発見。意味は変えていない）
+              ('人間性をを育み', '人間性を育み'), ('求人のいただいています', '求人をいただいています'),
+              ('郵送してください下さい', '郵送してください'), ('本呼応に', '本校に')]   # 沿革「昭和22年」は1947年（「学部等の一覧・学校概要」のPDFで確認）
+
+def normalize_headings(body):
+    # ページの見出し（h1）の次が h3 から始まるなど、レベルが飛ぶのを直す。
+    hs = [(m.start(), int(m.group(1))) for m in re.finditer(r'<h([2-6])\b', body)]
+    if not hs: return body
+    if not any(l == 2 for _, l in hs):
+        shift = min(l for _, l in hs) - 2                       # h2 が1つもない：全体を上げる
+        return re.sub(r'<(/?)h([3-6])\b', lambda m: '<%sh%d' % (m.group(1), int(m.group(2)) - shift), body)
+    first_h2 = min(pos for pos, l in hs if l == 2)           # h2 より前にある h3 以下は、h2 にする
+    head, tail = body[:first_h2], body[first_h2:]
+    head = re.sub(r'<(/?)h([3-6])\b', r'<\1h2', head)
+    return head + tail
 
 def main(path):
     ch = ET.parse(path).getroot().find('channel'); g = lambda i, k: i.findtext(k, namespaces=ns)
@@ -261,6 +284,7 @@ def main(path):
             news.append({'date': g(i, 'wp:post_date')[:10], 'title': title, 'body': clean(body) + NEWS_APPEND.get(g(i, 'wp:post_id'), ''), 'id': g(i, 'wp:post_id')})
     for pg in pages:
         for a, b in TEXT_FIXES: pg['body'] = pg['body'].replace(a, b)
+        pg['body'] = normalize_headings(pg['body'])
     order = list(SLUG.values()); pages.sort(key=lambda p: order.index(p['slug'])); news.sort(key=lambda n: n['date'], reverse=True)
     (ROOT/'data/imported_pages.json').write_text(json.dumps(pages, ensure_ascii=False, indent=1), encoding='utf-8')
     (ROOT/'data/news.json').write_text(json.dumps(news, ensure_ascii=False, indent=1), encoding='utf-8')

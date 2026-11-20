@@ -28,12 +28,28 @@ table.info{border-collapse:collapse;width:100%}table.info th,table.info td{borde
 .line{text-align:center;margin:0 0 20px}.btn.line-btn{background:#06c755;font-weight:bold}
 .pending{background:#fff7e0;border:1px dashed #d9a400;padding:8px 12px;border-radius:6px;color:#7a5b00}.fnav{font-size:.85rem;line-height:2}.content table{border-collapse:collapse;max-width:100%}.content td,.content th{border:1px solid var(--line);padding:6px 10px}.content h3{border-bottom:2px solid var(--line);padding-bottom:4px}
 .photo{max-width:100%;height:auto;border-radius:10px;display:block;margin:12px 0}.hero-flex{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.hero-flex .hero-text{flex:1 1 320px}.hero-img{flex:0 1 260px;width:260px;min-width:0;max-width:100%;height:auto;margin:0 auto}.card .icon{display:block;margin-bottom:6px}
-.photo.small{max-width:320px}
-.photo.flyer{max-width:560px;margin:0 auto;box-shadow:0 2px 8px #0002}
+.photo.small{max-width:min(320px,100%)}
+.photo.flyer{max-width:min(560px,100%);margin:0 auto;box-shadow:0 2px 8px #0002}
 .line-banner{width:320px;max-width:100%;height:auto;border-radius:12px}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0 20px}.gallery img{width:100%;height:auto;border-radius:8px;display:block}
 .features-top{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.features-top .features-text{flex:1 1 300px}.features-img{flex:0 1 240px;width:240px;min-width:0;max-width:100%;height:auto;margin:0 auto}.banner{text-align:center}.banner img{max-width:100%;height:auto;border-radius:8px}
-.photo.med{max-width:480px}.photo.principal{max-width:240px;margin:12px 0}.stat{max-width:320px;height:auto;display:block;margin:4px 0 12px}
+.photo.med{max-width:min(480px,100%)}.photo.principal{max-width:min(240px,100%);margin:12px 0}.stat{max-width:320px;height:auto;display:block;margin:4px 0 12px}
 .doc{max-width:100%;height:auto;border:1px solid var(--line);border-radius:6px;background:#fff}
 .files{padding-left:1.2em}.files li{margin:6px 0}
 .draft{background:#fff1c9;color:#7a4b00;border:1px dashed #d9a400;border-radius:4px;padding:1px 6px;font-size:.9em}
+
+.content a,.content p,.content li,.content td{overflow-wrap:anywhere}
+/* 押しやすさ（タップできる大きさ 24px 以上）：フッターのリンク、PDFの一覧 */
+.fnav a{display:inline-block;padding:7px 5px}
+.fnav{line-height:1.6}
+.files li{padding:3px 0}.files a{display:inline-block;padding:4px 0}
+.site-footer p a{display:inline-block;padding:6px 4px}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:8px}.btnrow .btn{margin:0}
+.content a[href^="tel:"]{display:inline-block;padding:4px 2px}
+
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:var(--main);padding:8px 14px;border:2px solid var(--main);border-radius:6px;z-index:100}
+.skip:focus{left:8px}
+a:focus-visible,button:focus-visible{outline:3px solid #ffb400;outline-offset:2px}
+main:focus{outline:none}
+.news li a{display:inline-block;padding:5px 0}

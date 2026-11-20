@@ -11,11 +11,12 @@
 <script src="{{R}}assets/js/menu.js" defer></script>
 </head>
 <body>
+<a class="skip" href="#main">本文へ移動</a>
 <header class="site-header"><div class="wrap">
 <a class="brand" href="{{R}}"><img src="{{R}}favicon.svg" alt="" width="36" height="36"><span><strong>{{NAME_JA}}</strong><small>{{NAME_EN}}</small></span></a>
 <button class="menu-btn" aria-expanded="false" aria-controls="gnav">メニュー</button>
-<nav id="gnav">{{NAV}}</nav>
+<nav id="gnav" aria-label="メインメニュー">{{NAV}}</nav>
 </div></header>
-<main>
+<main id="main" tabindex="-1">
 <div class="page-title"><div class="wrap"><h1>{{H1}}</h1><p>{{LEAD}}</p></div></div>
 <div class="wrap content">
