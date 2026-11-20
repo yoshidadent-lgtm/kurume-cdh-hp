@@ -24,6 +24,9 @@ IMGMAP = {  # 旧パス: (新パス, alt, 幅, 高さ, class)
     'images/admission/flow_04t.jpg': ('assets/images/flow/year3.jpg', '3年次の授業の様子', 320, 243, 'photo small'),
     'images/admission/flow_03t.jpg': ('assets/images/flow/career.jpg', '学生のグループ活動の様子', 320, 240, 'photo small'),
     'images/dental-hyg_img02.png': ('assets/images/flow/school-life.webp', '学校行事（ボウリング大会・修学旅行・スポーツ大会）の様子', 1000, 500, 'photo'),
+    # 「就職について」の卒業生インタビュー。対応は、内容（久留米）からの推定。要確認。img04・sub04（オーストラリア勤務）は、旧サイトでコメントアウトされ非表示のため、載せない。
+    'images/realvoice/rl_vo_sub12.png': ('assets/images/career/voice2-workplace.png', '卒業生の勤務先の様子（久留米市内）', 360, 178, 'photo small'),
+    'images/realvoice/rl_vo_img12.jpg': ('assets/images/career/voice2-portrait.jpg', '歯科衛生士の卒業生', 407, 423, 'photo small'),
 }
 KEEP = {'p','h2','h3','h4','h5','ul','ol','li','table','thead','tbody','tr','th','td','a','strong','b','em','br','dl','dt','dd','blockquote'}
 DROP = {'script','style','iframe','img','form','input','button','select','textarea','svg','noscript','video','audio'}

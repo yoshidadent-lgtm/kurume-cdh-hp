@@ -96,3 +96,9 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - 4点の対応（1年・2年・3年・進路）は、旧サイトの並び順からの**推定**。違っていれば、`tools/import_wp.py` の `IMGMAP` を直す。
 - 学校行事の画像の対応（`dental-hyg_img02.png`）も、推定。
 - 「テーマの画像」の残りは、24点。
+
+## 9. 受領済み（2026-11-20、3回目）「就職について」
+- `rl_vo_sub12.png`（久留米の連携室のチラシと職員の写真）→ `assets/images/career/voice2-workplace.png`
+- `rl_vo_img12.jpg`（卒業生の写真、推定）→ `assets/images/career/voice2-portrait.jpg`
+- Modern Orthodontics（オーストラリア）の画像は、旧サイトのHTMLでコメントアウトされ（非表示）、文章もない。新サイトには載せない。ファイルも置いていない。
+- 未受領：`rl_vo_img11.jpg`、`rl_vo_sub11.png`（東京の歯科医院に勤務する卒業生。旧サイトで表示されているもの）。
