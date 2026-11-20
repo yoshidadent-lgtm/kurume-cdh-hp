@@ -29,15 +29,29 @@ IMGMAP = {  # 旧パス: (新パス, alt, 幅, 高さ, class)
     'images/realvoice/rl_vo_img12.jpg': ('assets/images/career/voice2-portrait.jpg', '歯科衛生士の卒業生', 407, 423, 'photo small'),
     'images/access/access.png': ('assets/images/access/access.png', '最寄駅から学校までのアクセス図（詳細は下の文章をご覧ください）', 602, 282, 'photo'),
     'images/canpus_image1.png': ('assets/images/opencampus/opencampus.webp', 'オープンキャンパスの様子', 1002, 387, 'photo'),
+    # 女子指定寮のチラシ（外部広告）。旧サイトでは、本文でなくアイキャッチ・ギャラリー側にあった可能性があるため、APPEND で置く。
 }
 # ページ末尾に足す文章（旧サイトの iframe の地図は、外部読み込みになるため、リンクに替える）
-APPEND = {'access': '''<section><h3>最寄駅・空港からのアクセス（図の内容）</h3><ul>
+APPEND = {'dormitory': '''<section><p><a href="{{R}}assets/images/dormitory/villa-mary-flyer.jpg"><img class="photo flyer" src="{{R}}assets/images/dormitory/villa-mary-flyer.jpg" alt="女子指定寮 Villa Mary（ヴィラマリア）のチラシ。内容は、下の文章をご覧ください。" loading="lazy" width="1414" height="2000"></a></p>
+<p><small>画像をクリックすると、大きく表示されます。（2024年のチラシです。最新の内容は、管理会社へお問い合わせください。）</small></p></section>
+<section><h3>チラシの内容（文字での案内）</h3>
+<table class="info">
+<tr><th>寮名</th><td>Villa Mary（ヴィラマリア）</td></tr>
+<tr><th>所在地</th><td>福岡県久留米市日吉町29-5</td></tr>
+<tr><th>交通</th><td>学校まで徒歩約12分／西鉄久留米駅まで徒歩5分／福岡（天神）まで電車で約30分</td></tr>
+<tr><th>家賃（月額）</th><td>41,500円（夕食付・平日のみ）／34,000円（食事なし）</td></tr>
+<tr><th>建物・設備</th><td>SRC（鉄骨鉄筋コンクリート）13階建、オートロック、防犯カメラ、24時間機械警備体制（ALSOK）、駐輪場あり、インターネット利用可、男性の出入り禁止、風呂・トイレ別</td></tr>
+<tr><th>備え付けの家具・家電</th><td>冷蔵庫、洗濯機、電子レンジ、照明、テーブル、ベッド、エアコン</td></tr>
+<tr><th>見学・お問い合わせ</th><td>西日本産業（株）　TEL 0942-39-3211　福岡県久留米市花畑3丁目3-3（定休日：毎週水曜日）。モデルルームの見学ができます。</td></tr>
+</table>
+<p>【この物件は、本校が所有している寮ではありません。管理会社へ委託している寮になります。】</p></section>''', 'access': '''<section><h3>最寄駅・空港からのアクセス（図の内容）</h3><ul>
 <li>福岡空港 → 久留米インター：45分 → 学校：車で15分</li>
 <li>JR鹿児島本線 博多駅 → JR久留米駅：特急で30分 → 学校：徒歩20分、車で5分</li>
 <li>西鉄大牟田線 福岡（天神）駅 → 西鉄久留米駅：特急で30分 → 学校：徒歩20分、車で5分</li>
 <li>西鉄大牟田線 大牟田駅 → 西鉄久留米駅：特急で30分</li>
 <li>西鉄櫛原駅 → 学校：徒歩10分</li></ul>
 <p><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82%E6%A0%9F%E5%8E%9F%E7%94%BA98" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></p></section>'''}
+TITLES = {'page-2465': '女子指定寮のご案内'}  # 旧サイトの管理用の名前（外部広告（女子寮））を、公開向けの見出しに替える
 KEEP = {'p','h2','h3','h4','h5','ul','ol','li','table','thead','tbody','tr','th','td','a','strong','b','em','br','dl','dt','dd','blockquote'}
 DROP = {'script','style','iframe','img','form','input','button','select','textarea','svg','noscript','video','audio'}
 PENDING = '<p class="pending">（準備中）この部分は、新サイトで作り直します。</p>'
@@ -98,6 +112,7 @@ def main(path):
         t, st, pw = g(i, 'wp:post_type'), g(i, 'wp:status'), g(i, 'wp:post_password')
         if st != 'publish' or pw: continue
         title, body = (i.findtext('title') or '').strip(), g(i, 'content:encoded') or ''
+        title = TITLES.get(g(i, 'wp:post_name'), title)
         if t == 'page' and g(i, 'wp:post_name') in SLUG:
             pages.append({'slug': SLUG[g(i, 'wp:post_name')], 'title': title, 'lead': '', 'body': '<section>%s</section>' % clean(body) + APPEND.get(SLUG[g(i, 'wp:post_name')], ''), 'old_slug': g(i, 'wp:post_name')})
         elif t == 'post':

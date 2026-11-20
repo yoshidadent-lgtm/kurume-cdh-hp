@@ -113,9 +113,9 @@
  },
  {
   "slug": "dormitory",
-  "title": "外部広告（女子寮）",
+  "title": "女子指定寮のご案内",
   "lead": "",
-  "body": "<section><p>\n  \n    \n女子指定寮のご案内\n    <br><br>女子指定寮の一例です。\n（この物件は本校が管理している物件ではありません。\n管理会社にお問い合わせください。）\n    \n\n<br><br></p></section>",
+  "body": "<section><p>\n  \n    \n女子指定寮のご案内\n    <br><br>女子指定寮の一例です。\n（この物件は本校が管理している物件ではありません。\n管理会社にお問い合わせください。）\n    \n\n<br><br></p></section><section><p><a href=\"{{R}}assets/images/dormitory/villa-mary-flyer.jpg\"><img class=\"photo flyer\" src=\"{{R}}assets/images/dormitory/villa-mary-flyer.jpg\" alt=\"女子指定寮 Villa Mary（ヴィラマリア）のチラシ。内容は、下の文章をご覧ください。\" loading=\"lazy\" width=\"1414\" height=\"2000\"></a></p>\n<p><small>画像をクリックすると、大きく表示されます。（2024年のチラシです。最新の内容は、管理会社へお問い合わせください。）</small></p></section>\n<section><h3>チラシの内容（文字での案内）</h3>\n<table class=\"info\">\n<tr><th>寮名</th><td>Villa Mary（ヴィラマリア）</td></tr>\n<tr><th>所在地</th><td>福岡県久留米市日吉町29-5</td></tr>\n<tr><th>交通</th><td>学校まで徒歩約12分／西鉄久留米駅まで徒歩5分／福岡（天神）まで電車で約30分</td></tr>\n<tr><th>家賃（月額）</th><td>41,500円（夕食付・平日のみ）／34,000円（食事なし）</td></tr>\n<tr><th>建物・設備</th><td>SRC（鉄骨鉄筋コンクリート）13階建、オートロック、防犯カメラ、24時間機械警備体制（ALSOK）、駐輪場あり、インターネット利用可、男性の出入り禁止、風呂・トイレ別</td></tr>\n<tr><th>備え付けの家具・家電</th><td>冷蔵庫、洗濯機、電子レンジ、照明、テーブル、ベッド、エアコン</td></tr>\n<tr><th>見学・お問い合わせ</th><td>西日本産業（株）　TEL 0942-39-3211　福岡県久留米市花畑3丁目3-3（定休日：毎週水曜日）。モデルルームの見学ができます。</td></tr>\n</table>\n<p>【この物件は、本校が所有している寮ではありません。管理会社へ委託している寮になります。】</p></section>",
   "old_slug": "page-2465"
  },
  {
