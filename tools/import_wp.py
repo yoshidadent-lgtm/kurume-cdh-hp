@@ -29,6 +29,14 @@ IMGMAP = {  # 旧パス: (新パス, alt, 幅, 高さ, class)
     'images/realvoice/rl_vo_img12.jpg': ('assets/images/career/voice2-portrait.jpg', '歯科衛生士の卒業生', 407, 423, 'photo small'),
     'images/access/access.png': ('assets/images/access/access.png', '最寄駅から学校までのアクセス図（詳細は下の文章をご覧ください）', 602, 282, 'photo'),
     'images/canpus_image1.png': ('assets/images/opencampus/opencampus.webp', 'オープンキャンパスの様子', 1002, 387, 'photo'),
+    # 学校案内。「学校の特長」の写真は、旧サイトの本文の並び順（01〜04）と、受領した順が一致するものと推定。要確認。
+    'images/school/dr_photo.jpg': ('assets/images/about/principal.jpg', '学校長 首藤 俊介', 400, 480, 'photo principal'),
+    'images/school/school_point_img01.jpg': ('assets/images/about/point-01.jpg', '歯科用の器具（ミラーとピンセット）', 480, 380, 'photo med'),
+    'images/school/school_point_img02.jpg': ('assets/images/about/point-02.jpg', '歯の記録を書き込む実習の様子', 480, 380, 'photo med'),
+    'images/school/school_point_img03.jpg': ('assets/images/about/point-03.jpg', '教科書を見ながら学ぶ学生', 480, 380, 'photo med'),
+    'images/school/school_point_img04.jpg': ('assets/images/about/point-04.jpg', '介護実習の様子', 480, 380, 'photo med'),
+    'images/school/point_02.svg': ('assets/images/about/stat-offers.svg', '新卒有効求人倍率 20.5倍（平成28年 全衛協調査）', 400, 138, 'stat'),
+    'images/school/point_01.svg': ('assets/images/about/stat-employment.svg', '卒業後の進路決定率 100%', 400, 138, 'stat'),
     # 女子指定寮のチラシ（外部広告）。旧サイトでは、本文でなくアイキャッチ・ギャラリー側にあった可能性があるため、APPEND で置く。
 }
 # ページ末尾に足す文章（旧サイトの iframe の地図は、外部読み込みになるため、リンクに替える）

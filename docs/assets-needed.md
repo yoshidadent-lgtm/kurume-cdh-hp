@@ -171,3 +171,17 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - `images/school_image1.png`（学生1人）→ `assets/images/features-student.webp`（トップの「特長」）。
 - `images/shikatv_banner_sp.jpg`（日歯8020テレビ「歯科衛生士のお仕事MOVIE」のバナー）→ `assets/images/jda-tv-banner.jpg`。リンク先は、旧サイトと同じ https://www.jda.or.jp/tv/78.html（日本歯科医師会のサイト。別タブで開く）。
 - 「テーマの画像」の必要分は、残り13点（学校案内の12点と、就職の東京勤務の卒業生2点のうち、重複を除く）。
+
+## 21. 受領済み（2026-11-20、学校案内）
+- `school/dr_photo.jpg`（学校長の写真）→ `assets/images/about/principal.jpg`（EXIFは取り除いた）。ユーザーから受領＝掲載してよいものとして扱う。
+- `school/school_point_img01〜04.jpg`（4点）→ `assets/images/about/point-01〜04.jpg`。対応は、旧サイトの本文の並び順と受領した順が一致するものとして推定（01=安心・信頼、02=教育環境・国家試験、03=学費、04=介護職員初任者研修）。
+- `school/point_01.svg`（100%）→ `assets/images/about/stat-employment.svg`（卒業後の進路決定率）。`school/point_02.svg`（20.5倍。平成28年 全衛協調査）→ `assets/images/about/stat-offers.svg`（新卒有効求人倍率）。
+- 「学校長メッセージ」の本文は、`[call_php]`（テーマ側）にあり、XMLに入っていない。準備中のまま。
+
+## 22. 「テーマの画像」の残り（2026-11-20 時点）
+**必要：6点**
+- `school/school_point_img05_new.jpg`（歯科大や地域大学と連携し充実した講師陣）、`school/school_point_img06.jpg`（通学にも便利なアクセス環境）。学校案内。
+- `dental-hyg_img01.png`、`dental-hygn/whats_img01.jpg`。学校案内、歯科衛生士について。
+- `realvoice/rl_vo_img11.jpg`、`rl_vo_sub11.png`。就職について（東京勤務の卒業生）。
+
+**載せない：7点**（在校生・講師の写真）、**不要：2点**（`rl_vo_img04.jpg`、`rl_vo_sub04.png`。旧サイトで非表示）。
