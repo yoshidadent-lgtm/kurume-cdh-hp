@@ -165,3 +165,9 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - `realvoice/st_vo_img11〜13.jpg`、`st_tc_img01〜04.jpg`（講師・在校生インタビュー）。
 
 **不要（旧サイトで非表示）**：`realvoice/rl_vo_img04.jpg`、`rl_vo_sub04.png`。
+
+## 20. 受領済み（2026-11-20、トップの3点）
+- `images/about_image1.png`（2人の学生。先に受領済みのものと同一）→ `assets/images/students.webp`（WebPに変換。トップの先頭）。これで、先に「推定」としていた対応が、確定した。
+- `images/school_image1.png`（学生1人）→ `assets/images/features-student.webp`（トップの「特長」）。
+- `images/shikatv_banner_sp.jpg`（日歯8020テレビ「歯科衛生士のお仕事MOVIE」のバナー）→ `assets/images/jda-tv-banner.jpg`。リンク先は、旧サイトと同じ https://www.jda.or.jp/tv/78.html（日本歯科医師会のサイト。別タブで開く）。
+- 「テーマの画像」の必要分は、残り13点（学校案内の12点と、就職の東京勤務の卒業生2点のうち、重複を除く）。
