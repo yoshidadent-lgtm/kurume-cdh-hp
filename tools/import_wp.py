@@ -101,10 +101,30 @@ def fixlink(h):
         return '{{R}}' + SLUG.get(path, path) + '/' if path in SLUG else ('{{R}}' if not path else h)
     return h
 
+# NextGEN Gallery（[ngg ... ids="N"]）→ 受領した写真のギャラリー。ids と受領したフォルダの対応（旧サイトの本文の並び順と、ZIPの名前の番号が一致）
+NGG = {'1': ('shinsatsu', '診察室'), '3': ('hall', '多目的大ホール'), '4': ('library', '2F図書室'), '5': ('kiso', '4F基礎実習室'), '6': ('shinkan', '新館教室')}
+
+def gallery_html(gid):
+    from PIL import Image
+    d, name = NGG[gid]; base = ROOT / 'assets/images/facilities' / d
+    items = []
+    for f in sorted(base.glob('[0-9][0-9].jpg')):
+        w, h = Image.open(f).size; t = Image.open(base / ('thumb-' + f.name)).size
+        items.append('<a href="{{R}}assets/images/facilities/%s/%s"><img src="{{R}}assets/images/facilities/%s/thumb-%s" alt="%sの様子（%s）" loading="lazy" width="%d" height="%d"></a>'
+                     % (d, f.name, d, f.name, name, f.stem.lstrip('0'), t[0], t[1]))
+    return '<div class="gallery">%s</div>' % ''.join(items)
+
 def clean(src):
+    galleries = {}
+    def _g(m):
+        k = '@@GALLERY%s@@' % m.group(1)
+        if m.group(1) in NGG: galleries[k] = gallery_html(m.group(1)); return k
+        return m.group(0)
+    src = re.sub(r'\[ngg[^\]]*?ids="(\d+)"[^\]]*\]', _g, src)
     src = re.sub(r"\[call_php[^\]]*\]", '@@PENDING@@', src)
     src = re.sub(r"\[(?:ngg|contact-form-7|gallery|[a-z_]+)[^\]]*\]", '@@PENDING@@', src)
     c = Clean(); c.feed(src); out = ''.join(c.out).replace('@@PENDING@@', PENDING)
+    for k, v in galleries.items(): out = out.replace(k, v)
     out = re.sub(r'<(\w+)>\s*</\1>', '', out)                      # 空タグ
     out = re.sub(r'<p>\s*(<p class="pending">.*?</p>)\s*</p>', r'\1', out, flags=re.S)
     if '<li>' not in out: out = re.sub(r'</?(ul|ol)>', '', out)
