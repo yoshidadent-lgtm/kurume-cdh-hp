@@ -32,7 +32,9 @@ IMGMAP = {  # 旧パス: (新パス, alt, 幅, 高さ, class)
     # 女子指定寮のチラシ（外部広告）。旧サイトでは、本文でなくアイキャッチ・ギャラリー側にあった可能性があるため、APPEND で置く。
 }
 # ページ末尾に足す文章（旧サイトの iframe の地図は、外部読み込みになるため、リンクに替える）
-APPEND = {'dormitory': '''<section><p><a href="{{R}}assets/images/dormitory/villa-mary-flyer.jpg"><img class="photo flyer" src="{{R}}assets/images/dormitory/villa-mary-flyer.jpg" alt="女子指定寮 Villa Mary（ヴィラマリア）のチラシ。内容は、下の文章をご覧ください。" loading="lazy" width="1414" height="2000"></a></p>
+APPEND = {'results': '''<section><p><img class="photo" src="{{R}}assets/images/results/2026-11.webp" alt="令和9年度入学生 学校推薦型選抜（高校推薦）・総合型選抜（3回） 入学試験結果。合格番号は、1201、2301、2303。" loading="lazy" width="2000" height="1125"></p>
+<h3>令和9年度入学生 学校推薦型選抜（高校推薦）・総合型選抜（3回） 入学試験結果</h3>
+<p>合格番号：1201、2301、2303</p></section>''', 'dormitory': '''<section><p><a href="{{R}}assets/images/dormitory/villa-mary-flyer.jpg"><img class="photo flyer" src="{{R}}assets/images/dormitory/villa-mary-flyer.jpg" alt="女子指定寮 Villa Mary（ヴィラマリア）のチラシ。内容は、下の文章をご覧ください。" loading="lazy" width="1414" height="2000"></a></p>
 <p><small>画像をクリックすると、大きく表示されます。（2024年のチラシです。最新の内容は、管理会社へお問い合わせください。）</small></p></section>
 <section><h3>チラシの内容（文字での案内）</h3>
 <table class="info">

@@ -122,7 +122,7 @@
   "slug": "results",
   "title": "合格発表",
   "lead": "",
-  "body": "<section>合格発表\n    \n    <h2>EXAMINATION　RESULTS</h2>\n\n</a>\n<br><br></section>",
+  "body": "<section>合格発表\n    \n    <h2>EXAMINATION　RESULTS</h2>\n\n</a>\n<br><br></section><section><p><img class=\"photo\" src=\"{{R}}assets/images/results/2026-11.webp\" alt=\"令和9年度入学生 学校推薦型選抜（高校推薦）・総合型選抜（3回） 入学試験結果。合格番号は、1201、2301、2303。\" loading=\"lazy\" width=\"2000\" height=\"1125\"></p>\n<h3>令和9年度入学生 学校推薦型選抜（高校推薦）・総合型選抜（3回） 入学試験結果</h3>\n<p>合格番号：1201、2301、2303</p></section>",
   "old_slug": "page-2482"
  }
 ]
