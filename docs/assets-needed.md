@@ -146,3 +146,22 @@ XML（2026-11-19）の公開ページ・公開投稿から拾った一覧。合�
 - 写真に入っていた位置情報（GPS）・カメラ情報（EXIF）は、取り除いた。
 - 一部の写真に、学生・教員が写っている（診察室1枚、4F基礎実習室1枚、2F図書室1枚、新館教室1枚）。掲載の同意は、学校側で確認済みのものとして扱う（要確認）。
 - 未取得のギャラリー：「保護者会誌2025」のページ（ギャラリー8）。このページは、新サイトに作っていない（冊子はお知らせから7点を公開済み）。
+
+## 19. 「テーマの画像」の残り（2026-11-20 時点の正確な集計）
+「テーマの画像」＝旧サイトのデザインの一部として、WordPress のテーマのフォルダ（`kdhs/wp-content/themes/<テーマ名>/images/`）に入っている画像。メディアライブラリ（`uploads/`）には入っておらず、XMLにも入っていない。テーマ名は、XMLからは分からない。
+
+**必要：16点**
+| ファイル（`images/` 以下） | 使うページ |
+|---|---|
+| `dental-hyg_img01.png` | 学校案内、歯科衛生士について |
+| `dental-hygn/whats_img01.jpg` | 学校案内、歯科衛生士について |
+| `school/dr_photo.jpg`（学校長の写真） | 学校案内 |
+| `school/school_point_img01〜04.jpg`、`school_point_img05_new.jpg`、`school_point_img06.jpg`（6点） | 学校案内 |
+| `school/point_01.svg`、`point_02.svg` | 学校案内 |
+| `about_image1.png`、`school_image1.png`、`shikatv_banner_sp.jpg` | トップ |
+| `realvoice/rl_vo_img11.jpg`、`rl_vo_sub11.png` | 就職について（東京勤務の卒業生） |
+
+**載せない方針：7点**（ユーザー決定：在校生・講師の写真）
+- `realvoice/st_vo_img11〜13.jpg`、`st_tc_img01〜04.jpg`（講師・在校生インタビュー）。
+
+**不要（旧サイトで非表示）**：`realvoice/rl_vo_img04.jpg`、`rl_vo_sub04.png`。
